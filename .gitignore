@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Inputs of the build scripts (large, come from your Factorio install)
+data-raw-dump.json
+script-output/
+factoriolab/

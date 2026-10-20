@@ -1,0 +1,939 @@
+:root {
+    --bg: #e6e9ec;
+    --card: #fff;
+    --fg: #1b2127;
+    --mut: #5c6873;
+    --bd: #c3cbd2;
+    --acc: #c98a00;
+    --tint: color-mix(in srgb, var(--acc) 16%, transparent);
+    --ok: #2e8b57;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px)
+}
+
+@media(prefers-color-scheme:dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #16191d;
+        --card: #232930;
+        --fg: #e8ecef;
+        --mut: #94a0ab;
+        --bd: #38414a;
+        --acc: #f2b11c;
+        --ok: #5fcf8f
+    }
+}
+
+:root[data-theme="dark"] {
+    --bg: #16191d;
+    --card: #232930;
+    --fg: #e8ecef;
+    --mut: #94a0ab;
+    --bd: #38414a;
+    --acc: #f2b11c;
+    --ok: #5fcf8f
+}
+
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    -webkit-text-size-adjust: 100%
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box
+}
+
+[hidden] {
+    display: none !important
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-tap-highlight-color: transparent
+}
+
+button,
+input,
+select,
+summary {
+    touch-action: manipulation
+}
+
+h1,
+h2,
+summary {
+    font-family: "Chakra Petch", system-ui, sans-serif
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(20px, 5vw, 28px)
+}
+
+h2 {
+    font-size: 16px;
+    margin: 0 0 8px
+}
+
+.top {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 14px 16px 2px;
+    border-left: 6px solid var(--acc)
+}
+
+.top p {
+    margin: 2px 0 0;
+    color: var(--mut);
+    font-size: 14px
+}
+
+main {
+    display: grid;
+    grid-template-columns: minmax(310px, 390px) minmax(0, 1fr);
+    gap: 14px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px 16px 32px;
+    align-items: start
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px
+}
+
+.note {
+    font-size: 12px;
+    color: var(--mut);
+    margin: 8px 0 0
+}
+
+.t {
+    display: inline-flex;
+    flex: none
+}
+
+.t img {
+    display: block
+}
+
+.ph {
+    display: inline-grid;
+    place-items: center;
+    background: var(--bd);
+    border-radius: 6px;
+    font-weight: 700
+}
+
+button,
+input,
+select {
+    font: inherit;
+    color: var(--fg)
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid var(--bd);
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: 16px
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    color: var(--mut);
+    margin: 10px 0 4px
+}
+
+:focus-visible {
+    outline: 3px solid var(--acc);
+    outline-offset: 2px
+}
+
+.btn {
+    min-height: 40px;
+    padding: 6px 12px;
+    border: 1px solid var(--bd);
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap
+}
+
+.btn:hover {
+    border-color: var(--acc)
+}
+
+.btn[aria-pressed="true"],
+.pick[aria-pressed="true"],
+.sg[aria-pressed="true"] {
+    border-color: var(--acc);
+    background: var(--tint)
+}
+
+.curbtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 60px;
+    padding: 8px 10px;
+    border: 2px solid var(--bd);
+    border-radius: 10px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer
+}
+
+.curname {
+    flex: 1;
+    font-weight: 600;
+    font-size: 16px
+}
+
+.chev {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--acc)
+}
+
+.row {
+    display: flex;
+    gap: 8px
+}
+
+.row>div:first-child {
+    flex: 1.2
+}
+
+.row>div:last-child {
+    flex: 1
+}
+
+.pkhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+    margin-bottom: 6px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+    gap: 6px;
+    max-height: 330px;
+    overflow: auto;
+    margin-top: 8px;
+    padding: 2px
+}
+
+.pick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 80px;
+    padding: 6px 2px;
+    border: 2px solid var(--bd);
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1.15;
+    text-align: center
+}
+
+details.cfg {
+    margin-top: 10px;
+    border-top: 1px solid var(--bd);
+    padding-top: 8px
+}
+
+details.cfg summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    min-height: 32px
+}
+
+.cfgsum {
+    margin-left: auto;
+    display: flex;
+    gap: 2px
+}
+
+.presets {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 10px 0 0
+}
+
+.seg {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap
+}
+
+.sg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1 1 84px;
+    min-height: 64px;
+    padding: 6px;
+    border: 2px solid var(--bd);
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 11px
+}
+
+.sum {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px
+}
+
+.sum>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    padding: 8px 10px
+}
+
+.sum b {
+    display: block;
+    font: 700 20px/1.1 "Chakra Petch", system-ui, sans-serif;
+    color: var(--acc)
+}
+
+.sum span {
+    font-size: 12px;
+    color: var(--mut)
+}
+
+.views {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px
+}
+
+.views .btn {
+    flex: 1;
+    justify-content: center;
+    min-height: 44px;
+    background: var(--card)
+}
+
+.crumbs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px
+}
+
+.crumbs .btn {
+    min-height: 32px;
+    padding: 2px 8px
+}
+
+.dtools {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap
+}
+
+.scroll {
+    overflow: auto;
+    max-width: 100%;
+    max-height: 72vh;
+    border: 1px solid var(--bd);
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch
+}
+
+svg text {
+    font-family: system-ui, sans-serif
+}
+
+.nd {
+    cursor: default
+}
+
+.nd[role] {
+    cursor: pointer
+}
+
+.nd[role]:hover>rect:first-of-type,
+.nd[role]:focus-visible>rect:first-of-type {
+    stroke: var(--acc);
+    stroke-width: 3
+}
+
+.nd:focus-visible {
+    outline: none
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 8px
+}
+
+.rc {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4px 10px;
+    align-items: center;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    padding: 10px
+}
+
+.rc .nm {
+    font-weight: 600
+}
+
+.rc .rec {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+    font-size: 12px;
+    color: var(--mut);
+    align-items: center
+}
+
+.ing {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px
+}
+
+.ct {
+    text-align: right;
+    line-height: 1.1
+}
+
+.ct b {
+    display: block;
+    font: 700 22px "Chakra Petch", system-ui, sans-serif;
+    color: var(--acc)
+}
+
+.ct small {
+    font-size: 11px;
+    color: var(--mut)
+}
+
+.meta {
+    grid-column: 1/-1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    border: 1px solid var(--bd);
+    border-radius: 20px;
+    padding: 2px 9px;
+    color: var(--mut)
+}
+
+@media(min-width:900px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh
+    }
+
+    .top {
+        flex: none;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 8px 16px 0
+    }
+
+    .top p {
+        display: none
+    }
+
+    h1 {
+        font-size: 22px
+    }
+
+    .bar {
+        flex: none;
+        width: calc(100% - 32px);
+        max-width: 1368px;
+        margin: 8px auto 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        align-items: flex-end;
+        padding: 8px 12px
+    }
+
+    .itemrate {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end
+    }
+
+    .itemrate .row>div:first-child {
+        width: 96px;
+        flex: none
+    }
+
+    .itemrate .row>div:last-child {
+        width: 132px;
+        flex: none
+    }
+
+    .bar label {
+        margin: 0 0 3px;
+        font-size: 12px;
+        white-space: nowrap
+    }
+
+    .bar input,
+    .bar select {
+        min-height: 40px
+    }
+
+    .curbtn {
+        width: 230px;
+        min-height: 44px;
+        padding: 4px 10px
+    }
+
+    .chev,
+    #pkclose,
+    .cfg>summary {
+        display: none
+    }
+
+    details.cfg {
+        margin: 0;
+        border: 0;
+        padding: 0;
+        flex: 1 1 auto
+    }
+
+    .cfgbody {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 18px;
+        align-items: flex-end
+    }
+
+    .presets {
+        margin: 0
+    }
+
+    .presets .btn {
+        min-height: 36px
+    }
+
+    #mach {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 16px
+    }
+
+    .sg {
+        flex: none;
+        min-width: 0;
+        min-height: 0;
+        padding: 3px
+    }
+
+    .sg span {
+        display: none
+    }
+
+    .sg img {
+        width: 30px;
+        height: 30px
+    }
+
+    main {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 12px 16px;
+        grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+        align-items: stretch
+    }
+
+    .picker {
+        margin: 0;
+        display: flex;
+        flex-direction: column
+    }
+
+    .gw {
+        position: relative;
+        flex: 1;
+        min-height: 300px;
+        margin-top: 8px
+    }
+
+    .gw .grid {
+        position: absolute;
+        inset: 0;
+        max-height: none;
+        margin-top: 0
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+        overflow: visible
+    }
+
+    .tabs .btn {
+        min-height: 32px;
+        padding: 2px 10px
+    }
+
+    .res {
+        display: flex;
+        flex-direction: column;
+        min-height: 0
+    }
+
+    .sum {
+        flex: none;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-bottom: 10px
+    }
+
+    .sum>div {
+        padding: 6px 10px
+    }
+
+    .sum span {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+
+    .views {
+        flex: none;
+        margin-bottom: 10px
+    }
+
+    .views .btn {
+        min-height: 38px
+    }
+
+    .res>.card {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        margin: 0
+    }
+
+    .res>.card .scroll {
+        max-height: none
+    }
+
+    .cards {
+        align-content: start
+    }
+
+    .grid,
+    .cards,
+    .scroll {
+        scrollbar-width: thin
+    }
+}
+
+@media(max-width:899px) {
+    main {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 10px 12px 28px
+    }
+
+    .top {
+        padding: 12px 12px 0
+    }
+
+    .picker {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        margin: 0;
+        border-radius: 0;
+        overflow: auto;
+        padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px))
+    }
+
+    body.pk .picker {
+        display: block
+    }
+
+    body.pk {
+        overflow: hidden
+    }
+
+    .grid {
+        max-height: none;
+        grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+        overflow: visible
+    }
+
+    .pick {
+        font-size: 12px;
+        min-height: 88px
+    }
+
+    .cards {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .sum {
+        grid-template-columns: 1fr 1fr
+    }
+
+    .btn {
+        min-height: 44px
+    }
+}
+
+.dtools #zfs {
+    margin-left: auto
+}
+
+.dtools .btn svg {
+    flex: none
+}
+
+.sg.txt {
+    min-width: 44px;
+    justify-content: center
+}
+
+.sg.txt span {
+    display: inline
+}
+
+.vp {
+    position: relative;
+    height: min(70vh, 640px);
+    min-height: 300px;
+    overflow: hidden;
+    border: 1px solid var(--bd);
+    border-radius: 8px;
+    background: var(--card);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none
+}
+
+.vp.drag {
+    cursor: grabbing
+}
+
+.vp > svg {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+.vp .nd {
+    cursor: pointer
+}
+
+@media(min-width:900px) {
+    .res>.card .vp {
+        flex: 1;
+        height: auto;
+        min-height: 0
+    }
+
+    .sum {
+        grid-template-columns: repeat(6, minmax(0, 1fr))
+    }
+}
+
+@media(max-width:899px) {
+    .vp {
+        height: min(58vh, 520px)
+    }
+}
+
+#v-diag.fs {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    padding: calc(10px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) calc(12px + env(safe-area-inset-left, 0px))
+}
+
+#v-diag.fs .vp {
+    flex: 1;
+    height: auto;
+    min-height: 0
+}
+
+#v-diag.fs .note {
+    display: none
+}
+
+body.fsm {
+    overflow: hidden
+}
+#mach>.note{flex-basis:100%;margin:0}
+.grp .hlp{max-width:240px;margin:0 0 4px}
+body.nohelp .hlp{display:none}
+
+#tip{position:fixed;z-index:100;max-width:300px;padding:10px 12px;background:var(--card);color:var(--fg);border:1px solid var(--acc);border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.35);pointer-events:none;font-size:13px;line-height:1.4}
+#tip b{display:block;font:700 14px "Chakra Petch",system-ui,sans-serif;color:var(--acc);margin-bottom:4px}
+#tip p{margin:0 0 6px}
+#tip p:last-child{margin:0}
+#tip .tipx{color:var(--mut);border-top:1px solid var(--bd);padding-top:6px}
+label[data-tip]{cursor:help}
+
+* { scrollbar-width: thin; scrollbar-color: var(--mut) var(--card) }
+::-webkit-scrollbar { width: 10px; height: 10px }
+::-webkit-scrollbar-track { background: var(--card); border-radius: 6px }
+::-webkit-scrollbar-thumb { background: var(--mut); border-radius: 6px; border: 2px solid var(--card) }
+::-webkit-scrollbar-thumb:hover { background: var(--acc) }
+
+/* ---------- v2: sprite icons, settings panel, module picker ---------- */
+.ico{display:inline-block;flex:none;background:url(../data/icons.webp) no-repeat}
+.ph{font-size:12px;color:var(--mut)}
+.sum span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+.cfg>summary{display:flex!important}
+.set{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:12px;margin-top:10px}
+.sec{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;background:color-mix(in srgb,var(--bg) 55%,var(--card))}
+.sec h3{margin:0 0 6px;font:700 13px/1.2 "Chakra Petch",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.row2{display:grid;grid-template-columns:minmax(96px,112px) 1fr;gap:6px 10px;align-items:center;padding:8px 0;border-top:1px solid var(--bd)}
+.sec h3+.row2{border-top:0}
+.row2 .lab{text-align:right}
+.row2 label{margin:0;display:block;color:var(--fg);font-size:14px;cursor:help}
+.row2 .lab small{display:block;color:var(--mut);font-size:11px;line-height:1.25}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ib{display:inline-grid;place-items:center;width:48px;height:48px;padding:3px;border:2px solid var(--bd);border-radius:8px;background:var(--bg);cursor:pointer}
+.ib:hover{border-color:var(--mut)}
+.ib[aria-pressed="true"]{border-color:var(--acc);background:var(--tint)}
+.pill{min-height:34px;padding:4px 12px;border:2px solid var(--bd);border-radius:999px;background:var(--bg);cursor:pointer;font-size:13px}
+.pill:hover{border-color:var(--mut)}
+.pill[aria-pressed="true"]{border-color:var(--acc);background:var(--tint)}
+.cur{font-size:13px;color:var(--mut)}.x{color:var(--mut)}
+.nin{width:76px;min-height:38px;padding:4px 8px}
+.mpop{position:fixed;z-index:70;background:var(--card);border:2px solid var(--acc);border-radius:10px;padding:8px;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.mrow{display:flex;gap:6px;margin-bottom:6px}.mrow:last-child{margin-bottom:0}
+@media(min-width:900px){.cfgbody,#mach{display:block!important}details.cfg{flex:1 1 100%!important}.bar{align-items:flex-start}}
+@media(max-width:899px){.row2{grid-template-columns:1fr}.row2 .lab{text-align:left;display:flex;gap:8px;align-items:baseline}}
+
+/* ---------- v3: dropdowns, icon tabs, machine tiers, production table ---------- */
+.row2{grid-template-columns:1fr!important;gap:4px!important}
+.row2 .lab{text-align:left!important;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.row2 label{white-space:normal!important}
+.cbtn{display:flex;align-items:center;gap:8px;min-height:46px;width:100%;max-width:360px;padding:4px 10px;border:2px solid var(--bd);border-radius:8px;background:var(--bg);cursor:pointer;text-align:left}
+.cbtn:hover{border-color:var(--mut)}.cbtn .cn{flex:1;font-size:14px}.chev2{color:var(--acc);margin-left:auto}
+.cpop{position:fixed;z-index:70;display:flex;flex-direction:column;gap:6px;max-height:min(70vh,520px);padding:8px;background:var(--card);border:2px solid var(--acc);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.clist{overflow:auto;display:flex;flex-direction:column}
+.crow{display:flex;align-items:center;gap:10px;width:100%;padding:5px 8px;border:0;border-radius:8px;background:transparent;cursor:pointer;text-align:left;margin:0;color:var(--fg);font-size:15px}
+.crow:hover,.crow[aria-pressed="true"]{background:var(--tint)}
+.crow input{width:20px;min-height:0;height:20px;padding:0;accent-color:var(--acc)}
+.crow small{margin-left:auto;color:var(--mut)}
+.cpop input[type=search]{min-height:40px}
+.gtab{width:56px;height:56px;display:grid;place-items:center;padding:0;border:2px solid var(--bd);border-radius:8px;background:color-mix(in srgb,var(--mut) 28%,var(--card));cursor:pointer}
+.gtab:hover{border-color:var(--mut)}.gtab[aria-pressed="true"]{background:var(--acc);border-color:var(--acc)}
+.ib.lock{opacity:.35;cursor:not-allowed}
+.tiers{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tier{display:inline-flex;align-items:center;gap:4px;padding:2px 8px 2px 4px;border:1px solid var(--bd);border-radius:20px;font-size:12px;opacity:.7}
+.tier.cur{border-color:var(--acc);opacity:1;background:var(--tint)}.tier i{font-style:normal;color:var(--mut);font-size:10px}
+.ptable{display:grid;grid-template-columns:repeat(6,max-content) minmax(220px,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:8px;overflow:auto;max-height:72vh}
+.ptable .th{background:var(--card);padding:8px 10px;font:700 12px "Chakra Petch",system-ui,sans-serif;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0;z-index:1}
+.ptable .td{background:var(--card);padding:6px 10px;display:flex;gap:6px;align-items:center;min-height:54px}.ptable .td.wrap{flex-wrap:wrap}
+.bd{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border:1px solid var(--bd);border-radius:6px;background:color-mix(in srgb,var(--mut) 22%,var(--card));flex:none}
+.bd b{position:absolute;right:2px;bottom:-1px;font:700 12px "Chakra Petch",system-ui,sans-serif;color:#fff;text-shadow:0 0 3px #000,0 0 3px #000,0 0 2px #000}
+.bd-ing{background:#2f6b3a}.bd-pw{background:#1f6f78}.bd-by{background:#7a5230}.bd-pw .ph{background:transparent;font-size:22px}
+#v-table .note{margin:0 0 8px}
+
+/* ---------- v4: item picker as a modal (FactorioLab style), page-anchored popups, editable counts ---------- */
+.mpop,.cpop{position:absolute!important}
+.top{position:relative}
+#lang{position:absolute;right:16px;top:12px;width:auto;min-height:36px;padding:4px 8px;font-size:14px}
+main{grid-template-columns:minmax(0,1fr)!important}
+.picker{display:none!important}
+body.pk .picker{display:flex!important;flex-direction:column;position:fixed;z-index:60;inset:max(4vh,12px) max(5vw,12px);margin:0;padding:16px;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+body.pk::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55}
+body.pk{overflow:hidden}
+#pkclose{display:inline-flex!important}
+.chev{display:inline!important}
+.curbtn{width:auto!important;min-width:230px}
+.picker .tabs{flex-wrap:nowrap;overflow-x:auto;gap:2px;border-bottom:1px solid var(--bd);margin:6px 0 8px;padding-bottom:0}
+.gtab{width:auto;height:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;color:var(--fg);font-size:15px;white-space:nowrap}
+.gtab[aria-pressed="true"]{background:transparent;border-bottom-color:var(--acc);color:var(--acc)}
+.gtab:hover{background:var(--tint)}
+.picker .gw{position:relative;flex:1;min-height:0;margin:8px 0 0}
+.picker .gw .grid{position:absolute;inset:0;max-height:none;overflow:auto;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:4px;align-content:start}
+.pick{min-height:54px!important;padding:3px!important;border-width:1px}
+.pick>span:not(.t){display:none}
+.cnt{width:64px;min-height:34px;padding:2px 6px;font:700 18px "Chakra Petch",system-ui,sans-serif;color:var(--acc);text-align:right}
+.ct .cnt{display:block;margin-left:auto}
+.ptable .cnt{width:60px;font-size:15px}
+@media(max-width:899px){body.pk .picker{inset:0!important;border-radius:0}#lang{top:8px;right:10px}}
+
+/* ---------- v5: a diagram with room to breathe (hidden views stay hidden) ---------- */
+.res>.card[hidden]{display:none!important}
+@media(min-width:900px){body{display:block!important;min-height:0!important}main{flex:none!important;min-height:auto!important;display:block!important}.res{display:block!important}.res>.card:not([hidden]){display:block!important;flex:none!important}.res>.card .vp{flex:none!important;height:clamp(440px,64vh,680px)!important;min-height:0!important}}
+@media(max-width:899px){.vp{height:clamp(380px,56vh,560px)!important}}

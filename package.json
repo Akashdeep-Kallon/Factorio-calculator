@@ -1,0 +1,11 @@
+{
+  "name": "factorio-calculator",
+  "version": "1.0.0",
+  "description": "Factorio reverse calculator: pick an item and a rate, get machines, belts, power and raw resources.",
+  "private": true,
+  "scripts": {
+    "data": "node scripts/build-data.mjs data-raw-dump.json factoriolab/public/data/spa/data.json",
+    "locale": "node scripts/build-locale.mjs",
+    "test": "node test/engine.test.js"
+  }
+}
